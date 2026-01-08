@@ -138,6 +138,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               // Marcar body como loaded para prevenir FOUC
+              // Next.js cssChunking maneja automáticamente la optimización de CSS
               (function() {
                 if (document.readyState === 'loading') {
                   document.addEventListener('DOMContentLoaded', function() {

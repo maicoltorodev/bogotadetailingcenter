@@ -29,6 +29,10 @@ const nextConfig = {
   // Optimización de bundle - tree-shaking agresivo para librerías grandes
   // Solo incluir librerías que realmente se usan en la aplicación
   experimental: {
+    // CSS Chunking: Divide CSS en chunks más pequeños y optimiza la carga
+    // 'strict' divide CSS agresivamente para mejor rendimiento
+    // Esto reduce render-blocking requests al dividir CSS en chunks más pequeños
+    cssChunking: 'strict',
     optimizePackageImports: [
       'lucide-react', // ✅ Usado en muchos componentes para iconos
       '@radix-ui/react-dialog', // ✅ Usado en whatsapp-button.tsx
