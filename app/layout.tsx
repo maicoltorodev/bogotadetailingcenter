@@ -5,10 +5,6 @@ import { Navbar } from "@/components/navbar"
 import { StructuredData } from "@/components/structured-data"
 import { ClientOnlyComponents } from "@/components/client-only-components"
 import { LazyLayoutComponents } from "@/components/lazy-layout-components"
-import { ResourcePreloads } from "@/components/resource-preloads"
-import { CriticalCSS } from "@/components/critical-css"
-import { CSSPreloader } from "@/components/css-preloader"
-import { AsyncCSSLoader } from "@/components/async-css-loader"
 import { SITE_URL, getAbsoluteUrl } from "@/lib/config"
 import "./globals.css"
 
@@ -129,13 +125,13 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={`${geist.variable} ${geistMono.variable} font-sans antialiased`}>
-        <CriticalCSS />
-        <CSSPreloader />
+        {/* Preload recursos críticos para mejorar LCP - Next.js App Router procesa estos links correctamente */}
+        <link rel="preload" href="/images/logo.png" as="image" type="image/png" fetchPriority="high" />
+        <link rel="preload" href="/images/mustang.png" as="image" type="image/png" fetchPriority="high" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              // Marcar body como loaded después de aplicar CSS crítico
-              // Esto previene FOUC (Flash of Unstyled Content)
+              // Marcar body como loaded para prevenir FOUC
               (function() {
                 if (document.readyState === 'loading') {
                   document.addEventListener('DOMContentLoaded', function() {
@@ -148,8 +144,6 @@ export default function RootLayout({
             `,
           }}
         />
-        <AsyncCSSLoader />
-        <ResourcePreloads />
         <StructuredData />
         <ClientOnlyComponents />
         <LazyLayoutComponents />

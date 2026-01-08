@@ -173,6 +173,22 @@
     /* Asegurar que elementos posicionados también respeten el scrollbar */
     box-sizing: border-box;
   }
+  
+  /* Solución para API deprecada H1UserAgentFontSizeInSection */
+  /* Define explícitamente el font-size para h1 dentro de section, article, aside, nav */
+  h1 {
+    font-size: 2em;
+    margin-block: 0.67em;
+  }
+  
+  /* Asegurar que h1 dentro de secciones también tengan font-size explícito */
+  section h1,
+  article h1,
+  aside h1,
+  nav h1 {
+    font-size: 2em;
+  }
+  
   /* Optimización: Reducir animaciones si el usuario prefiere menos movimiento */
   @media (prefers-reduced-motion: reduce) {
     *,
