@@ -7,6 +7,6 @@ const WhatsAppButton = dynamic(() => import("@/components/whatsapp-button").then
   ssr: false, // No crítico para SEO, puede ser client-only
 })
 
-export function WhatsAppButtonWrapper() {
+export function WhatsAppButtonLoader() {
   return <WhatsAppButton />
 }

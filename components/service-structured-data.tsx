@@ -1,7 +1,6 @@
 "use client"
 
-import Script from "next/script"
-import { SITE_URL, getAbsoluteUrl } from "@/lib/config"
+import { SITE_URL } from "@/lib/config"
 
 interface ServiceStructuredDataProps {
   name: string

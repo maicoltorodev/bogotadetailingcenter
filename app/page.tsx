@@ -9,7 +9,7 @@ import { CoursesSection } from "@/components/courses-section"
 import { Testimonials } from "@/components/testimonials"
 import { Contact } from "@/components/contact"
 import { Footer } from "@/components/footer"
-import { WhatsAppButtonWrapper } from "@/components/whatsapp-button-wrapper"
+import { WhatsAppButtonLoader } from "@/components/whatsapp-button-loader"
 
 export default function Page() {
   const carImage = "/images/mustang.png"
@@ -27,7 +27,7 @@ export default function Page() {
       <Testimonials />
       <Contact />
       <Footer />
-      <WhatsAppButtonWrapper />
+      <WhatsAppButtonLoader />
     </main>
   )
 }

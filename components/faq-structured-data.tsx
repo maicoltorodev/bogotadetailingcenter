@@ -1,8 +1,5 @@
 "use client"
 
-import Script from "next/script"
-import { SITE_URL, getAbsoluteUrl } from "@/lib/config"
-
 interface FAQStructuredDataProps {
   faqs: Array<{ question: string; answer: string }>
 }

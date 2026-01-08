@@ -34,17 +34,6 @@ export function scrollToHash(
 }
 
 /**
- * Hook helper para crear un handler de clic que hace scroll a un hash
- * Útil para componentes que necesitan manejar clics en enlaces con hash
- */
-export function createScrollHandler(hash: string) {
-  return (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
-    scrollToHash(hash)
-  }
-}
-
-/**
  * Helper para generar href correcto según la ruta actual
  * Si estamos en home, usa hash directo, si no, redirige a home con hash
  */
