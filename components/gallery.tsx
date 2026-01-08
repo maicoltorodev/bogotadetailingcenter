@@ -45,9 +45,12 @@ function GalleryItem({ item, index }: { item: typeof images[0]; index: number })
     const card = cardRef.current
     if (!card) return
 
+    // Usar matchMedia en lugar de window.innerWidth para evitar forced reflow
+    // matchMedia no causa forced reflow porque no lee propiedades geométricas del DOM
+    const mobileMediaQuery = window.matchMedia('(max-width: 767px)')
+    
     // Solo aplicar Intersection Observer en móvil (pantallas menores a md)
-    const checkIfMobile = () => window.innerWidth < 768
-    if (!checkIfMobile()) {
+    if (!mobileMediaQuery.matches) {
       // En desktop, siempre mostrar en hover (comportamiento original)
       return
     }
@@ -59,9 +62,14 @@ function GalleryItem({ item, index }: { item: typeof images[0]; index: number })
           return
         }
 
-        // Verificar si el elemento está en el centro de la pantalla
+        // Usar entry.boundingClientRect en lugar de card.getBoundingClientRect()
+        // entry.boundingClientRect ya está calculado por IntersectionObserver
+        // y no causa forced reflow adicional
         const rect = entry.boundingClientRect
-        const viewportHeight = window.innerHeight
+        // window.innerHeight puede causar forced reflow si se lee después de cambios DOM
+        // pero aquí solo se lee, no hay cambios DOM previos, así que es seguro
+        // Sin embargo, podríamos usar entry.rootBounds.height si estuviera disponible
+        const viewportHeight = entry.rootBounds?.height ?? window.innerHeight
         const centerY = viewportHeight / 2
         
         // El elemento está en el centro si su centro está cerca del centro de la pantalla
@@ -85,8 +93,19 @@ function GalleryItem({ item, index }: { item: typeof images[0]; index: number })
 
     observer.observe(card)
 
+    // Manejar cambios de tamaño usando matchMedia
+    const handleResize = () => {
+      if (!mobileMediaQuery.matches) {
+        setIsInView(false)
+        observer.disconnect()
+      }
+    }
+    
+    mobileMediaQuery.addEventListener('change', handleResize)
+
     return () => {
       observer.disconnect()
+      mobileMediaQuery.removeEventListener('change', handleResize)
     }
   }, [])
 

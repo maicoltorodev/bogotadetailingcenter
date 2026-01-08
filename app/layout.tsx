@@ -128,6 +128,12 @@ export default function RootLayout({
         {/* Preload recursos críticos para mejorar LCP - Next.js App Router procesa estos links correctamente */}
         <link rel="preload" href="/images/logo.png" as="image" type="image/png" fetchPriority="high" />
         <link rel="preload" href="/images/mustang.png" as="image" type="image/png" fetchPriority="high" />
+        
+        {/* Preconnect a recursos externos que se usarán después (mejora velocidad cuando el usuario interactúa) */}
+        {/* Estos no bloquean el render inicial, solo preparan la conexión para uso futuro */}
+        <link rel="dns-prefetch" href="https://wa.me" />
+        <link rel="dns-prefetch" href="https://www.google.com" />
+        
         <script
           dangerouslySetInnerHTML={{
             __html: `

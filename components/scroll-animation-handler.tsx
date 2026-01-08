@@ -9,8 +9,12 @@ import { useEffect } from "react"
  */
 export function ScrollAnimationHandler() {
   useEffect(() => {
+    // Usar matchMedia en lugar de window.innerWidth para evitar forced reflow
+    // matchMedia no causa forced reflow porque no lee propiedades geométricas del DOM
+    const mobileMediaQuery = window.matchMedia('(max-width: 767px)')
+    
     // Solo aplicar en móvil (pantallas menores a md)
-    if (window.innerWidth >= 768) {
+    if (!mobileMediaQuery.matches) {
       return // En desktop, usar hover normal
     }
 
@@ -60,9 +64,10 @@ export function ScrollAnimationHandler() {
     // Observar todos los elementos
     elements.forEach((element) => observer.observe(element))
 
-    // Manejar resize - si cambia a desktop, limpiar
+    // Manejar resize usando matchMedia para evitar forced reflow
     const handleResize = () => {
-      if (window.innerWidth >= 768) {
+      // Usar mobileMediaQuery.matches en lugar de leer window.innerWidth
+      if (!mobileMediaQuery.matches) {
         elements.forEach((element) => {
           element.classList.remove('scroll-center-active')
           activatedElements.delete(element)
@@ -71,10 +76,13 @@ export function ScrollAnimationHandler() {
       }
     }
     
+    // Escuchar cambios en matchMedia en lugar de eventos resize directos
+    mobileMediaQuery.addEventListener('change', handleResize)
     window.addEventListener('resize', handleResize, { passive: true })
 
     return () => {
       observer.disconnect()
+      mobileMediaQuery.removeEventListener('change', handleResize)
       window.removeEventListener('resize', handleResize)
       
       // Limpiar clases activas

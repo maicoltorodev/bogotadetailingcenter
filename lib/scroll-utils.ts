@@ -2,6 +2,11 @@
  * Utilidad para hacer scroll suave a un elemento con hash
  * @param hash - El hash del elemento (ej: "#servicios")
  * @param options - Opciones adicionales
+ * 
+ * Nota: Esta función lee propiedades geométricas (getBoundingClientRect, pageYOffset)
+ * que pueden causar forced reflow si se ejecutan después de cambios en el DOM.
+ * Se usa requestAnimationFrame para asegurar que las lecturas ocurran antes del próximo
+ * frame de renderizado, minimizando el riesgo de forced reflow.
  */
 export function scrollToHash(
   hash: string,
@@ -19,17 +24,25 @@ export function scrollToHash(
 
   const element = document.querySelector(hash)
   if (element) {
-    const elementPosition = element.getBoundingClientRect().top
-    const offsetPosition = elementPosition + window.pageYOffset - offset
+    // Usar requestAnimationFrame para asegurar que las lecturas geométricas
+    // ocurran en el momento óptimo del ciclo de renderizado, evitando forced reflow
+    requestAnimationFrame(() => {
+      // Batch reads: leer todas las propiedades geométricas primero antes de cualquier escritura
+      const elementPosition = element.getBoundingClientRect().top
+      const scrollPosition = window.pageYOffset || window.scrollY
+      const offsetPosition = elementPosition + scrollPosition - offset
 
-    window.scrollTo({
-      top: offsetPosition,
-      behavior,
+      // Ahora hacer el scroll (write operation)
+      window.scrollTo({
+        top: offsetPosition,
+        behavior,
+      })
+
+      // Actualizar history después del scroll (write operation)
+      if (updateHistory) {
+        window.history.pushState(null, "", hash)
+      }
     })
-
-    if (updateHistory) {
-      window.history.pushState(null, "", hash)
-    }
   }
 }
 

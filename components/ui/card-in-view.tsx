@@ -22,19 +22,29 @@ export function CardInView({
   const linkRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
-    // Check if mobile
+    // Usar matchMedia en lugar de window.innerWidth para evitar forced reflow
+    // matchMedia no causa forced reflow porque no lee propiedades geométricas del DOM
+    const mobileMediaQuery = window.matchMedia('(max-width: 767px)')
+    
+    // Check if mobile usando matchMedia
     const checkMobile = () => {
-      const mobile = window.innerWidth < 768 // md breakpoint
+      const mobile = mobileMediaQuery.matches
       setIsMobile(mobile)
       return mobile
     }
     
     const mobile = checkMobile()
-    window.addEventListener("resize", checkMobile)
+    
+    // Escuchar cambios en matchMedia en lugar de eventos resize directos
+    mobileMediaQuery.addEventListener('change', checkMobile)
+    window.addEventListener("resize", checkMobile, { passive: true })
 
     // Only set up on mobile
     if (!mobile) {
-      return () => window.removeEventListener("resize", checkMobile)
+      return () => {
+        mobileMediaQuery.removeEventListener('change', checkMobile)
+        window.removeEventListener("resize", checkMobile)
+      }
     }
 
     // Encontrar el Link dentro del wrapper
@@ -203,6 +213,7 @@ export function CardInView({
     }, { passive: true })
     
     return () => {
+      mobileMediaQuery.removeEventListener('change', checkMobile)
       window.removeEventListener("resize", checkMobile)
       // Limpiar clase de scrolling del body
       document.body.classList.remove('scrolling')

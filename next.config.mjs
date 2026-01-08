@@ -27,25 +27,27 @@ const nextConfig = {
   // Optimización de producción
   productionBrowserSourceMaps: false,
   // Optimización de bundle - tree-shaking agresivo para librerías grandes
+  // Solo incluir librerías que realmente se usan en la aplicación
   experimental: {
     optimizePackageImports: [
-      'lucide-react',
-      '@radix-ui/react-icons',
-      '@radix-ui/react-dialog',
-      '@radix-ui/react-dropdown-menu',
-      '@radix-ui/react-accordion',
-      '@radix-ui/react-slot',
-      '@radix-ui/react-label',
-      'recharts',
-      'react-hook-form',
-      'date-fns',
-      'cmdk',
-      'input-otp',
-      'react-day-picker',
-      'react-resizable-panels',
-      'vaul',
-      'sonner',
-      'next-themes',
+      'lucide-react', // ✅ Usado en muchos componentes para iconos
+      '@radix-ui/react-dialog', // ✅ Usado en whatsapp-button.tsx
+      '@radix-ui/react-accordion', // ✅ Usado en app/faq/page.tsx
+      '@radix-ui/react-slot', // ✅ Usado en button.tsx y otros componentes base
+      '@radix-ui/react-label', // ✅ Usado en label.tsx
+      'sonner', // ✅ Usado para toasts/notificaciones
+      // Removidas librerías no usadas:
+      // - @radix-ui/react-icons: no se usa
+      // - @radix-ui/react-dropdown-menu: no se usa
+      // - recharts: solo existe chart.tsx que no se usa
+      // - react-hook-form: solo existe form.tsx que no se usa
+      // - date-fns: no se usa
+      // - cmdk: solo existe command.tsx que no se usa
+      // - input-otp: solo existe input-otp.tsx que no se usa
+      // - react-day-picker: solo se usa como ícono, no como componente
+      // - react-resizable-panels: solo existe resizable.tsx que no se usa
+      // - vaul: solo existe drawer.tsx que no se usa
+      // - next-themes: no se usa
     ],
   },
   // Optimización de compilación
