@@ -122,6 +122,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   html {
     scroll-behavior: smooth;
     margin: 0;
@@ -129,6 +130,7 @@
     /* Prevenir movimiento del navbar cuando aparece/desaparece la barra de scroll */
     scrollbar-gutter: stable;
   }
+
   body {
     @apply bg-background text-foreground;
     margin: 0;
@@ -142,14 +144,15 @@
     /* Fallback para navegadores que no soportan scrollbar-gutter */
     overflow-y: scroll;
   }
-  
+
   /* En navegadores que soportan scrollbar-gutter, usar esa en su lugar */
   @supports (scrollbar-gutter: stable) {
     body {
-      overflow-y: auto; /* Volver a auto cuando scrollbar-gutter funciona */
+      overflow-y: auto;
+      /* Volver a auto cuando scrollbar-gutter funciona */
     }
   }
-  
+
   /* Proteger contenido principal contra movimiento del scrollbar */
   /* El scrollbar-gutter en html ya protege el viewport, pero agregamos protección extra */
   main {
@@ -158,7 +161,7 @@
     /* Asegurar que elementos dentro respeten el espacio del scrollbar */
     box-sizing: border-box;
   }
-  
+
   /* Para navegadores sin soporte de scrollbar-gutter, usar padding dinámico */
   @supports not (scrollbar-gutter: stable) {
     body {
@@ -166,21 +169,21 @@
       /* Esto previene el movimiento sin necesidad de padding extra */
     }
   }
-  
+
   /* Proteger elementos fixed/absolute que podrían moverse */
   [class*="fixed"],
   [class*="absolute"] {
     /* Asegurar que elementos posicionados también respeten el scrollbar */
     box-sizing: border-box;
   }
-  
+
   /* Solución para API deprecada H1UserAgentFontSizeInSection */
   /* Define explícitamente el font-size para h1 dentro de section, article, aside, nav */
   h1 {
     font-size: 2em;
     margin-block: 0.67em;
   }
-  
+
   /* Asegurar que h1 dentro de secciones también tengan font-size explícito */
   section h1,
   article h1,
@@ -188,9 +191,10 @@
   nav h1 {
     font-size: 2em;
   }
-  
+
   /* Optimización: Reducir animaciones si el usuario prefiere menos movimiento */
   @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {
@@ -204,27 +208,33 @@
 
 /* Optimizaciones móvil */
 @media (max-width: 767px) {
+
   /* Prevenir scroll horizontal */
   body {
     overflow-x: hidden;
     position: relative;
   }
-  
+
   /* Mejorar rendimiento de scroll */
   * {
     -webkit-overflow-scrolling: touch;
   }
-  
+
   /* Touch action para mejor rendimiento */
-  button, a, [role="button"] {
+  button,
+  a,
+  [role="button"] {
     touch-action: manipulation;
   }
-  
+
   /* Prevenir zoom en inputs (iOS Safari) */
-  input, select, textarea {
-    font-size: 16px; /* Evita zoom automático en iOS */
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+    /* Evita zoom automático en iOS */
   }
-  
+
   /* Estados :active mejorados para móvil - usar transform para GPU */
   button:active,
   a:active,
@@ -232,27 +242,33 @@
     transform: scale(0.95) translateZ(0);
     opacity: 0.9;
   }
-  
+
   /* Mejorar line-height en móvil para legibilidad */
-  p, span {
+  p,
+  span {
     line-height: 1.6;
   }
-  
-  h1, h2, h3 {
+
+  h1,
+  h2,
+  h3 {
     line-height: 1.2;
     letter-spacing: -0.02em;
   }
-  
+
   /* Optimizar transformaciones - usar GPU */
   [class*="hover:scale"],
   [class*="group-hover:scale"] {
     will-change: transform;
-    transform: translateZ(0); /* Forzar aceleración GPU */
+    transform: translateZ(0);
+    /* Forzar aceleración GPU */
   }
-  
+
   /* Reducir transiciones complejas en móvil */
-  img, [class*="transition"] {
-    transition-duration: 0.2s; /* Más rápido en móvil */
+  img,
+  [class*="transition"] {
+    transition-duration: 0.2s;
+    /* Más rápido en móvil */
   }
 }
 
@@ -262,6 +278,7 @@
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -273,6 +290,7 @@
     opacity: 0;
     transform: translateX(-30px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -293,44 +311,53 @@
 
 /* Animación de brillo para "Detailing" - optimizada */
 @keyframes glow {
-  0%, 100% {
+
+  0%,
+  100% {
     text-shadow: 0 0 8px rgba(245, 158, 11, 0.4),
-                 0 0 16px rgba(245, 158, 11, 0.3),
-                 0 0 24px rgba(245, 158, 11, 0.2);
+      0 0 16px rgba(245, 158, 11, 0.3),
+      0 0 24px rgba(245, 158, 11, 0.2);
     /* Usar opacity en lugar de filter brightness cuando sea posible */
   }
+
   50% {
     text-shadow: 0 0 16px rgba(245, 158, 11, 0.7),
-                 0 0 32px rgba(245, 158, 11, 0.5),
-                 0 0 48px rgba(245, 158, 11, 0.3),
-                 0 0 64px rgba(245, 158, 11, 0.15);
+      0 0 32px rgba(245, 158, 11, 0.5),
+      0 0 48px rgba(245, 158, 11, 0.3),
+      0 0 64px rgba(245, 158, 11, 0.15);
     /* Sin filter para mejor rendimiento - text-shadow es suficiente */
   }
 }
 
 /* Optimización móvil: Usar transform en lugar de filter para mejor rendimiento */
 @media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
+
   .hero-title-highlight,
   .hero-lema {
-    transform: translateZ(0); /* Forzar aceleración por hardware */
+    transform: translateZ(0);
+    /* Forzar aceleración por hardware */
     backface-visibility: hidden;
-    will-change: transform; /* Optimización para GPU */
+    will-change: transform;
+    /* Optimización para GPU */
     /* Evitar filter en móvil - es muy costoso */
   }
 }
 
 /* Animación de brillo reducida para móvil - sin filter para mejor rendimiento */
 @keyframes glowMobile {
-  0%, 100% {
+
+  0%,
+  100% {
     text-shadow: 0 0 4px rgba(245, 158, 11, 0.3),
-                 0 0 8px rgba(245, 158, 11, 0.2),
-                 0 0 12px rgba(245, 158, 11, 0.15);
+      0 0 8px rgba(245, 158, 11, 0.2),
+      0 0 12px rgba(245, 158, 11, 0.15);
     /* Sin filter: brightness() es muy costoso en móvil */
   }
+
   50% {
     text-shadow: 0 0 8px rgba(245, 158, 11, 0.5),
-                 0 0 16px rgba(245, 158, 11, 0.35),
-                 0 0 24px rgba(245, 158, 11, 0.2);
+      0 0 16px rgba(245, 158, 11, 0.35),
+      0 0 24px rgba(245, 158, 11, 0.2);
     /* Sin filter para mejor rendimiento */
   }
 }
@@ -344,14 +371,14 @@ body.low-performance .hero-lema {
 
 .hero-title-highlight {
   animation: fadeInLeft 1s ease-out 0.3s both,
-             glowMobile 2s ease-in-out 1.3s infinite;
+    glowMobile 2s ease-in-out 1.3s infinite;
   position: relative;
 }
 
 @media (min-width: 640px) {
   .hero-title-highlight {
     animation: fadeInLeft 1s ease-out 0.3s both,
-               glow 2s ease-in-out 1.3s infinite;
+      glow 2s ease-in-out 1.3s infinite;
   }
 }
 
@@ -368,30 +395,36 @@ body.low-performance .hero-lema {
 
 /* Animación de brillo para botones */
 @keyframes buttonGlow {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 15px rgba(245, 158, 11, 0.6),
-                 0 0 30px rgba(245, 158, 11, 0.5),
-                 0 0 45px rgba(245, 158, 11, 0.4),
-                 0 0 60px rgba(245, 158, 11, 0.2);
+      0 0 30px rgba(245, 158, 11, 0.5),
+      0 0 45px rgba(245, 158, 11, 0.4),
+      0 0 60px rgba(245, 158, 11, 0.2);
   }
+
   50% {
     box-shadow: 0 0 25px rgba(245, 158, 11, 0.9),
-                 0 0 50px rgba(245, 158, 11, 0.7),
-                 0 0 75px rgba(245, 158, 11, 0.5),
-                 0 0 100px rgba(245, 158, 11, 0.3);
+      0 0 50px rgba(245, 158, 11, 0.7),
+      0 0 75px rgba(245, 158, 11, 0.5),
+      0 0 100px rgba(245, 158, 11, 0.3);
   }
 }
 
 /* Animación de brillo reducida para botones en móvil - optimizada */
 @keyframes buttonGlowMobile {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 6px rgba(245, 158, 11, 0.4),
-                 0 0 12px rgba(245, 158, 11, 0.3);
+      0 0 12px rgba(245, 158, 11, 0.3);
     /* Reducido para mejor rendimiento en móvil */
   }
+
   50% {
     box-shadow: 0 0 10px rgba(245, 158, 11, 0.6),
-                 0 0 20px rgba(245, 158, 11, 0.4);
+      0 0 20px rgba(245, 158, 11, 0.4);
     /* Menos sombras = mejor rendimiento */
   }
 }
@@ -416,36 +449,39 @@ body.low-performance .form-submit-button {
 
 /* Animación más sutil para el botón del formulario */
 @keyframes buttonGlowSubtle {
-  0%, 100% {
-    box-shadow: 0 0 10px rgba(245, 158, 11, 0.5) !important,
-                0 0 20px rgba(245, 158, 11, 0.4) !important,
-                0 0 30px rgba(245, 158, 11, 0.2) !important;
+
+  0%,
+  100% {
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.5),
+      0 0 20px rgba(245, 158, 11, 0.4),
+      0 0 30px rgba(245, 158, 11, 0.2) !important;
   }
+
   50% {
-    box-shadow: 0 0 15px rgba(245, 158, 11, 0.7) !important,
-                0 0 30px rgba(245, 158, 11, 0.5) !important,
-                0 0 45px rgba(245, 158, 11, 0.3) !important,
-                0 0 60px rgba(245, 158, 11, 0.15) !important;
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.7),
+      0 0 30px rgba(245, 158, 11, 0.5),
+      0 0 45px rgba(245, 158, 11, 0.3),
+      0 0 60px rgba(245, 158, 11, 0.15) !important;
   }
 }
 
 /* Animación aún más sutil para móvil */
 @keyframes buttonGlowSubtleMobile {
-  0%, 100% {
-    box-shadow: 0 0 6px rgba(245, 158, 11, 0.4) !important,
-                0 0 12px rgba(245, 158, 11, 0.3) !important;
+
+  0%,
+  100% {
+    box-shadow: 0 0 4px rgba(245, 158, 11, 0.4) !important;
   }
+
   50% {
-    box-shadow: 0 0 10px rgba(245, 158, 11, 0.6) !important,
-                0 0 20px rgba(245, 158, 11, 0.4) !important,
-                0 0 30px rgba(245, 158, 11, 0.2) !important;
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.6) !important;
   }
 }
 
 .form-submit-button {
   animation: buttonGlowSubtleMobile 3s ease-in-out 0.5s infinite !important;
   position: relative !important;
-  box-shadow: 0 0 6px rgba(245, 158, 11, 0.4), 0 0 12px rgba(245, 158, 11, 0.3) !important;
+  box-shadow: 0 0 4px rgba(245, 158, 11, 0.4) !important;
 }
 
 @media (min-width: 640px) {
@@ -461,12 +497,15 @@ body.low-performance .form-submit-button {
     left: -100%;
     opacity: 0;
   }
+
   10% {
     opacity: 1;
   }
+
   90% {
     opacity: 1;
   }
+
   100% {
     left: 100%;
     opacity: 0;
@@ -485,14 +524,12 @@ body.low-performance .form-submit-button {
   left: -100%;
   width: 60%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(192, 192, 192, 0.3) 20%,
-    rgba(255, 255, 255, 0.7) 50%,
-    rgba(192, 192, 192, 0.3) 80%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(192, 192, 192, 0.3) 20%,
+      rgba(255, 255, 255, 0.7) 50%,
+      rgba(192, 192, 192, 0.3) 80%,
+      transparent 100%);
   animation: silverSweep 3s ease-in-out infinite;
   pointer-events: none;
   z-index: 1;
@@ -500,7 +537,7 @@ body.low-performance .form-submit-button {
   box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
 }
 
-.experience-badge > * {
+.experience-badge>* {
   position: relative;
   z-index: 2;
 }
@@ -520,29 +557,32 @@ body.low-performance .form-submit-button {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.1) 30%,
-    rgba(245, 158, 11, 0.4) 50%,
-    rgba(255, 255, 255, 0.1) 70%,
-    transparent 100%
-  );
-  transform: skewX(-20deg) translateX(-100%) translateZ(0); /* GPU acceleration */
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.1) 30%,
+      rgba(245, 158, 11, 0.4) 50%,
+      rgba(255, 255, 255, 0.1) 70%,
+      transparent 100%);
+  transform: skewX(-20deg) translateX(-100%) translateZ(0);
+  /* GPU acceleration */
   opacity: 0;
   transition: opacity 0.2s ease;
   pointer-events: none;
   z-index: 10;
-  will-change: transform; /* Solo transform, opacity es barato */
-  animation: none; /* Sin animación por defecto */
-  backface-visibility: hidden; /* Optimización móvil */
+  will-change: transform;
+  /* Solo transform, opacity es barato */
+  animation: none;
+  /* Sin animación por defecto */
+  backface-visibility: hidden;
+  /* Optimización móvil */
 }
 
 /* En desktop: activar con hover */
 @media (hover: hover) and (pointer: fine) {
   .border-draw-sequential:hover::before {
     opacity: 1;
-    animation: shineSweep 1.5s ease-in-out; /* Se reinicia cada hover */
+    animation: shineSweep 1.5s ease-in-out;
+    /* Se reinicia cada hover */
   }
 }
 
@@ -556,16 +596,18 @@ body.low-performance .form-submit-button {
   0% {
     transform: skewX(-20deg) translateX(-100%) translateZ(0);
   }
+
   50% {
     transform: skewX(-20deg) translateX(100%) translateZ(0);
   }
+
   100% {
     transform: skewX(-20deg) translateX(100%) translateZ(0);
   }
 }
 
 /* Asegurar que el contenido esté por encima del brillo */
-.border-draw-sequential > * {
+.border-draw-sequential>* {
   position: relative;
   z-index: 2;
 }
@@ -573,7 +615,8 @@ body.low-performance .form-submit-button {
 /* Animación específica para cards de servicios - efecto de pulso/glow en el borde */
 .border-draw-services {
   position: relative;
-  overflow: visible; /* Visible para que el glow del borde se vea */
+  overflow: visible;
+  /* Visible para que el glow del borde se vea */
   transition: border-color 0.3s ease;
   /* Optimización: contener repaints */
   contain: layout style;
@@ -582,7 +625,8 @@ body.low-performance .form-submit-button {
 .border-draw-services::before {
   content: '';
   position: absolute;
-  inset: -3px; /* Extender fuera del borde para el glow */
+  inset: -3px;
+  /* Extender fuera del borde para el glow */
   border-radius: inherit;
   background: transparent;
   opacity: 0;
@@ -590,9 +634,12 @@ body.low-performance .form-submit-button {
   z-index: 1;
   box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
   transition: opacity 0.2s ease;
-  animation: none; /* Sin animación por defecto */
-  will-change: box-shadow; /* Optimización para la animación */
-  transform: translateZ(0); /* GPU acceleration */
+  animation: none;
+  /* Sin animación por defecto */
+  will-change: box-shadow;
+  /* Optimización para la animación */
+  transform: translateZ(0);
+  /* GPU acceleration */
 }
 
 /* En desktop: activar con hover */
@@ -600,6 +647,7 @@ body.low-performance .form-submit-button {
   .border-draw-services:hover {
     border-color: rgba(245, 158, 11, 0.5);
   }
+
   .border-draw-services:hover::before {
     opacity: 1;
     animation: borderPulse 1.2s ease-out;
@@ -610,6 +658,7 @@ body.low-performance .form-submit-button {
 .border-draw-services.scroll-center-active {
   border-color: rgba(245, 158, 11, 0.5);
 }
+
 .border-draw-services.scroll-center-active::before {
   opacity: 1;
   animation: borderPulse 1.2s ease-out;
@@ -618,15 +667,17 @@ body.low-performance .form-submit-button {
 @keyframes borderPulse {
   0% {
     box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.8),
-                0 0 0 0 rgba(245, 158, 11, 0.4);
+      0 0 0 0 rgba(245, 158, 11, 0.4);
   }
+
   50% {
     box-shadow: 0 0 0 6px rgba(245, 158, 11, 0.5),
-                0 0 0 12px rgba(245, 158, 11, 0.2);
+      0 0 0 12px rgba(245, 158, 11, 0.2);
   }
+
   100% {
     box-shadow: 0 0 0 10px rgba(245, 158, 11, 0),
-                0 0 0 16px rgba(245, 158, 11, 0);
+      0 0 0 16px rgba(245, 158, 11, 0);
   }
 }
 
@@ -642,7 +693,7 @@ body.reduced-motion .border-draw-services::before {
 }
 
 /* Asegurar que el contenido esté por encima del glow */
-.border-draw-services > * {
+.border-draw-services>* {
   position: relative;
   z-index: 2;
 }

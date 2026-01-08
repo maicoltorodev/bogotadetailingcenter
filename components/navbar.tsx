@@ -20,16 +20,16 @@ export function Navbar() {
   // Cerrar el menú al hacer scroll (solo en móvil)
   useEffect(() => {
     if (!isMenuOpen) return
-    
+
     const handleScroll = () => {
       setIsMenuOpen(false)
     }
-    
+
     // Pequeño delay para evitar cerrar inmediatamente después de abrir
     const timeoutId = setTimeout(() => {
       window.addEventListener('scroll', handleScroll, { passive: true })
     }, 300)
-    
+
     return () => {
       clearTimeout(timeoutId)
       window.removeEventListener('scroll', handleScroll)
@@ -39,10 +39,10 @@ export function Navbar() {
   const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, hash: string) => {
     e.preventDefault()
     e.stopPropagation()
-    
+
     // Cerrar el menú inmediatamente
     setIsMenuOpen(false)
-    
+
     // Si estamos en la página principal, hacer scroll a la sección
     if (pathname === "/") {
       setTimeout(() => {
@@ -57,7 +57,7 @@ export function Navbar() {
 
   const handleDesktopAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, hash: string) => {
     e.preventDefault()
-    
+
     // Si estamos en la página principal, hacer scroll a la sección
     if (pathname === "/") {
       scrollToHash(hash)
@@ -75,15 +75,14 @@ export function Navbar() {
           {/* Logo y Lema */}
           <div className="flex items-center gap-2 sm:gap-3">
             <Link href="/" className="flex items-center relative h-16 sm:h-20 md:h-28 lg:h-32 w-auto">
-              <Image 
-                src="/images/logo.png" 
-                alt="Bogotá Detailing Center" 
+              <Image
+                src="/images/logo.png"
+                alt="Bogotá Detailing Center"
                 width={128}
                 height={128}
                 className="h-16 sm:h-20 md:h-28 lg:h-32 w-auto object-contain"
                 priority
                 quality={75}
-                fetchPriority="high"
               />
             </Link>
             <div className="hidden md:block">
@@ -101,13 +100,12 @@ export function Navbar() {
             <a
               href={getHashHref("#servicios", pathname)}
               onClick={(e) => handleDesktopAnchorClick(e, "#servicios")}
-              className={`transition-colors font-medium ${
-                pathname?.startsWith("/servicios") || pathname?.startsWith("/ppf") || pathname?.startsWith("/polarizados") || pathname?.startsWith("/latoneria") ? "text-amber-500 font-semibold" : "text-neutral-300 hover:text-amber-500"
-              }`}
+              className={`transition-colors font-medium ${pathname?.startsWith("/servicios") || pathname?.startsWith("/ppf") || pathname?.startsWith("/polarizados") || pathname?.startsWith("/latoneria") ? "text-amber-500 font-semibold" : "text-neutral-300 hover:text-amber-500"
+                }`}
             >
               Servicios
             </a>
-            <a 
+            <a
               href={getHashHref("#nosotros", pathname)}
               onClick={(e) => handleDesktopAnchorClick(e, "#nosotros")}
               className="text-neutral-300 hover:text-amber-500 transition-colors font-medium"
@@ -159,30 +157,29 @@ export function Navbar() {
         {isMenuOpen && (
           <>
             {/* Overlay de fondo */}
-            <div 
+            <div
               className="md:hidden fixed inset-0 bg-neutral-950/80 backdrop-blur-sm z-40 touch-none"
               style={{ top: '80px' }}
               onClick={() => setIsMenuOpen(false)}
               onTouchStart={() => setIsMenuOpen(false)}
             />
-            
+
             {/* Menú desplegable */}
             <div className="md:hidden fixed top-[80px] sm:top-[96px] left-0 right-0 z-50 bg-neutral-950 border-b border-neutral-800 shadow-2xl max-h-[calc(100vh-80px)] sm:max-h-[calc(100vh-96px)] overflow-y-auto">
               <div className="container mx-auto px-4 py-6">
                 <div className="flex flex-col gap-3">
                   <a
                     href={getHashHref("#servicios", pathname)}
-                    className={`group flex items-center justify-between py-4 px-5 rounded-xl transition-all duration-200 touch-manipulation min-h-[48px] ${
-                      pathname?.startsWith("/servicios") || pathname?.startsWith("/ppf") || pathname?.startsWith("/polarizados") || pathname?.startsWith("/latoneria") 
-                        ? "bg-amber-500/10 text-amber-500 border border-amber-500/30" 
+                    className={`group flex items-center justify-between py-4 px-5 rounded-xl transition-all duration-200 touch-manipulation min-h-[48px] ${pathname?.startsWith("/servicios") || pathname?.startsWith("/ppf") || pathname?.startsWith("/polarizados") || pathname?.startsWith("/latoneria")
+                        ? "bg-amber-500/10 text-amber-500 border border-amber-500/30"
                         : "text-neutral-300 hover:text-white hover:bg-neutral-900/50 border border-transparent active:bg-neutral-900 active:scale-[0.98]"
-                    }`}
+                      }`}
                     onClick={(e) => handleAnchorClick(e, "#servicios")}
                   >
                     <span className="font-semibold text-base">Servicios</span>
                     <ChevronRight className={`h-5 w-5 transition-transform ${pathname?.startsWith("/servicios") || pathname?.startsWith("/ppf") || pathname?.startsWith("/polarizados") || pathname?.startsWith("/latoneria") ? "text-amber-500" : "text-neutral-400 group-hover:text-white group-hover:translate-x-1"}`} />
                   </a>
-                  
+
                   <a
                     href={getHashHref("#nosotros", pathname)}
                     className="group flex items-center justify-between py-4 px-5 rounded-xl text-neutral-300 hover:text-white hover:bg-neutral-900/50 transition-all duration-200 border border-transparent touch-manipulation min-h-[48px] active:bg-neutral-900 active:scale-[0.98]"
@@ -191,7 +188,7 @@ export function Navbar() {
                     <span className="font-semibold text-base">Nosotros</span>
                     <ChevronRight className="h-5 w-5 text-neutral-400 group-hover:text-white group-hover:translate-x-1 transition-transform" />
                   </a>
-                  
+
                   <a
                     href={getHashHref("#curso", pathname)}
                     className="group flex items-center justify-between py-4 px-5 rounded-xl text-neutral-300 hover:text-white hover:bg-neutral-900/50 transition-all duration-200 border border-transparent touch-manipulation min-h-[48px] active:bg-neutral-900 active:scale-[0.98]"
@@ -200,7 +197,7 @@ export function Navbar() {
                     <span className="font-semibold text-base">Curso</span>
                     <ChevronRight className="h-5 w-5 text-neutral-400 group-hover:text-white group-hover:translate-x-1 transition-transform" />
                   </a>
-                  
+
                   <a
                     href={getHashHref("#sedes", pathname)}
                     className="group flex items-center justify-between py-4 px-5 rounded-xl text-neutral-300 hover:text-white hover:bg-neutral-900/50 transition-all duration-200 border border-transparent touch-manipulation min-h-[48px] active:bg-neutral-900 active:scale-[0.98]"
@@ -209,7 +206,7 @@ export function Navbar() {
                     <span className="font-semibold text-base">Sedes</span>
                     <ChevronRight className="h-5 w-5 text-neutral-400 group-hover:text-white group-hover:translate-x-1 transition-transform" />
                   </a>
-                  
+
                   <div className="pt-2 mt-2 border-t border-neutral-800">
                     <a
                       href={getHashHref("#contacto", pathname)}
