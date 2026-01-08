@@ -157,7 +157,7 @@ export function Services() {
             </p>
             <Link 
               href="/#contacto" 
-              className="inline-block group/button w-full sm:w-auto relative overflow-hidden bg-gradient-to-r from-amber-500 to-amber-600 text-neutral-950 px-8 sm:px-10 py-4 sm:py-5 rounded-xl hover:from-amber-400 hover:to-amber-500 transition-all duration-300 font-bold text-base sm:text-lg shadow-lg hover:shadow-amber-500/50 hover:scale-105 touch-manipulation min-h-[44px] active:scale-95 active:opacity-90 before:absolute before:inset-0 before:bg-gradient-to-r before:from-amber-400 before:to-amber-500 before:opacity-0 group-hover/button:before:opacity-100 before:transition-opacity before:duration-300"
+              className="inline-flex group/button w-full sm:w-auto relative overflow-hidden bg-gradient-to-r from-amber-500 to-amber-600 text-neutral-950 px-8 sm:px-10 py-4 sm:py-5 rounded-xl hover:from-amber-400 hover:to-amber-500 transition-all duration-300 font-bold text-base sm:text-lg shadow-lg hover:shadow-amber-500/50 hover:scale-105 touch-manipulation min-h-[48px] min-w-[48px] items-center justify-center active:scale-95 active:opacity-90 before:absolute before:inset-0 before:bg-gradient-to-r before:from-amber-400 before:to-amber-500 before:opacity-0 group-hover/button:before:opacity-100 before:transition-opacity before:duration-300"
               onClick={(e) => {
                 e.preventDefault()
                 handleHashClick("#contacto")

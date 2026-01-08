@@ -87,7 +87,7 @@ export function Contact() {
                 >
                   <Button
                     size="lg"
-                    className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white hover:from-green-400 hover:to-green-500 font-bold text-sm md:text-base shadow-lg hover:shadow-green-500/50 transition-all duration-300 group-hover/button:scale-[1.02] min-h-[44px] touch-manipulation active:scale-95 active:opacity-90"
+                    className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white hover:from-green-400 hover:to-green-500 font-bold text-sm md:text-base shadow-lg hover:shadow-green-500/50 transition-all duration-300 group-hover/button:scale-[1.02] min-h-[48px] touch-manipulation active:scale-95 active:opacity-90"
                     onClick={(e) => {
                       if (navigator.vibrate) navigator.vibrate(50)
                     }}
@@ -199,7 +199,7 @@ export function Contact() {
               <Button
                 type="submit"
                 size="lg"
-                className="w-full bg-gradient-to-r from-amber-500 to-amber-600 text-neutral-950 hover:from-amber-400 hover:to-amber-500 font-bold text-base shadow-lg hover:shadow-amber-500/50 transition-all duration-300 mt-2 min-h-[44px] touch-manipulation active:scale-95 active:opacity-90"
+                className="w-full bg-gradient-to-r from-amber-500 to-amber-600 text-neutral-950 hover:from-amber-400 hover:to-amber-500 font-bold text-base shadow-lg hover:shadow-amber-500/50 transition-all duration-300 mt-2 min-h-[48px] touch-manipulation active:scale-95 active:opacity-90"
                 onClick={() => {
                   if (navigator.vibrate) navigator.vibrate(50)
                 }}

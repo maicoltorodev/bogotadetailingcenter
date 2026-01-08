@@ -43,7 +43,7 @@ export function Hero({ carImage }: HeroProps) {
             <p className="mb-6 sm:mb-8 text-base sm:text-lg md:text-xl leading-relaxed text-neutral-300 lg:text-2xl">
               Restauramos y protegemos el valor de su inversión con técnicas profesionales, productos premium y precios accesibles
             </p>
-            <div className="flex flex-col gap-3 sm:gap-4 sm:flex-row">
+            <div className="flex flex-col gap-4 sm:gap-6 sm:flex-row">
               <a 
                 href="#contacto"
                 onClick={(e) => {
@@ -51,11 +51,11 @@ export function Hero({ carImage }: HeroProps) {
                   if (navigator.vibrate) navigator.vibrate(30)
                   scrollToHash("#contacto")
                 }}
-                className="touch-manipulation"
+                className="inline-flex touch-manipulation min-h-[48px] min-w-[48px] items-center justify-center"
               >
                 <Button
                   size="lg"
-                  className="hero-contact-button bg-amber-500 text-neutral-950 hover:bg-amber-400 font-semibold w-full sm:w-auto min-h-[44px] touch-manipulation active:scale-95 active:opacity-90"
+                  className="hero-contact-button bg-amber-500 text-neutral-950 hover:bg-amber-400 font-semibold w-full sm:w-auto min-h-[48px] px-6 py-3 touch-manipulation active:scale-95 active:opacity-90"
                 >
                   Agendar Cita
                   <ChevronRight className="ml-2 h-5 w-5" />
@@ -67,12 +67,12 @@ export function Hero({ carImage }: HeroProps) {
                   e.preventDefault()
                   scrollToHash("#servicios")
                 }}
-                className="touch-manipulation"
+                className="inline-flex touch-manipulation min-h-[48px] min-w-[48px] items-center justify-center"
               >
                 <Button
                   size="lg"
                   variant="outline"
-                  className="bg-transparent text-white border-white/40 hover:bg-white/10 hover:text-white w-full sm:w-auto min-h-[44px] touch-manipulation active:scale-95 active:opacity-90"
+                  className="bg-transparent text-white border-white/40 hover:bg-white/10 hover:text-white w-full sm:w-auto min-h-[48px] px-6 py-3 touch-manipulation active:scale-95 active:opacity-90"
                 >
                   Ver Servicios
                 </Button>

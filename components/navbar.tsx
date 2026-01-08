@@ -143,7 +143,7 @@ export function Navbar() {
           <div className="md:hidden flex items-center justify-end">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-neutral-300 hover:text-amber-500 transition-colors p-3 min-w-[44px] min-h-[44px] flex items-center justify-center touch-manipulation"
+              className="text-neutral-300 hover:text-amber-500 transition-colors p-3 min-w-[48px] min-h-[48px] flex items-center justify-center touch-manipulation"
               aria-label="Toggle menu"
             >
               {isMenuOpen ? (
@@ -169,10 +169,10 @@ export function Navbar() {
             {/* Menú desplegable */}
             <div className="md:hidden fixed top-[80px] sm:top-[96px] left-0 right-0 z-50 bg-neutral-950 border-b border-neutral-800 shadow-2xl max-h-[calc(100vh-80px)] sm:max-h-[calc(100vh-96px)] overflow-y-auto">
               <div className="container mx-auto px-4 py-6">
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-3">
                   <a
                     href={getHashHref("#servicios", pathname)}
-                    className={`group flex items-center justify-between py-4 px-5 rounded-xl transition-all duration-200 touch-manipulation min-h-[44px] ${
+                    className={`group flex items-center justify-between py-4 px-5 rounded-xl transition-all duration-200 touch-manipulation min-h-[48px] ${
                       pathname?.startsWith("/servicios") || pathname?.startsWith("/ppf") || pathname?.startsWith("/polarizados") || pathname?.startsWith("/latoneria") 
                         ? "bg-amber-500/10 text-amber-500 border border-amber-500/30" 
                         : "text-neutral-300 hover:text-white hover:bg-neutral-900/50 border border-transparent active:bg-neutral-900 active:scale-[0.98]"
@@ -185,7 +185,7 @@ export function Navbar() {
                   
                   <a
                     href={getHashHref("#nosotros", pathname)}
-                    className="group flex items-center justify-between py-4 px-5 rounded-xl text-neutral-300 hover:text-white hover:bg-neutral-900/50 transition-all duration-200 border border-transparent touch-manipulation min-h-[44px] active:bg-neutral-900 active:scale-[0.98]"
+                    className="group flex items-center justify-between py-4 px-5 rounded-xl text-neutral-300 hover:text-white hover:bg-neutral-900/50 transition-all duration-200 border border-transparent touch-manipulation min-h-[48px] active:bg-neutral-900 active:scale-[0.98]"
                     onClick={(e) => handleAnchorClick(e, "#nosotros")}
                   >
                     <span className="font-semibold text-base">Nosotros</span>
@@ -194,7 +194,7 @@ export function Navbar() {
                   
                   <a
                     href={getHashHref("#curso", pathname)}
-                    className="group flex items-center justify-between py-4 px-5 rounded-xl text-neutral-300 hover:text-white hover:bg-neutral-900/50 transition-all duration-200 border border-transparent touch-manipulation min-h-[44px] active:bg-neutral-900 active:scale-[0.98]"
+                    className="group flex items-center justify-between py-4 px-5 rounded-xl text-neutral-300 hover:text-white hover:bg-neutral-900/50 transition-all duration-200 border border-transparent touch-manipulation min-h-[48px] active:bg-neutral-900 active:scale-[0.98]"
                     onClick={(e) => handleAnchorClick(e, "#curso")}
                   >
                     <span className="font-semibold text-base">Curso</span>
@@ -203,7 +203,7 @@ export function Navbar() {
                   
                   <a
                     href={getHashHref("#sedes", pathname)}
-                    className="group flex items-center justify-between py-4 px-5 rounded-xl text-neutral-300 hover:text-white hover:bg-neutral-900/50 transition-all duration-200 border border-transparent touch-manipulation min-h-[44px] active:bg-neutral-900 active:scale-[0.98]"
+                    className="group flex items-center justify-between py-4 px-5 rounded-xl text-neutral-300 hover:text-white hover:bg-neutral-900/50 transition-all duration-200 border border-transparent touch-manipulation min-h-[48px] active:bg-neutral-900 active:scale-[0.98]"
                     onClick={(e) => handleAnchorClick(e, "#sedes")}
                   >
                     <span className="font-semibold text-base">Sedes</span>
@@ -213,7 +213,7 @@ export function Navbar() {
                   <div className="pt-2 mt-2 border-t border-neutral-800">
                     <a
                       href={getHashHref("#contacto", pathname)}
-                      className="hero-contact-button group/button flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 text-neutral-950 px-6 py-4 rounded-xl hover:from-amber-400 hover:to-amber-500 transition-all duration-300 font-bold text-base shadow-lg hover:shadow-amber-500/50 hover:scale-[1.02] relative overflow-hidden touch-manipulation min-h-[44px] active:scale-[0.98] active:opacity-90"
+                      className="hero-contact-button group/button flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 text-neutral-950 px-6 py-4 rounded-xl hover:from-amber-400 hover:to-amber-500 transition-all duration-300 font-bold text-base shadow-lg hover:shadow-amber-500/50 hover:scale-[1.02] relative overflow-hidden touch-manipulation min-h-[48px] active:scale-[0.98] active:opacity-90"
                       onClick={(e) => {
                         if (navigator.vibrate) navigator.vibrate(30)
                         handleAnchorClick(e, "#contacto")

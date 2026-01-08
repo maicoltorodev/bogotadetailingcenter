@@ -72,7 +72,7 @@ export function WhatsAppButton() {
         <DialogClose asChild>
           <button
             onClick={() => setOpen(false)}
-            className="absolute top-4 right-4 z-50 flex h-8 w-8 items-center justify-center rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-800/50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+            className="absolute top-4 right-4 z-50 flex min-h-[48px] min-w-[48px] items-center justify-center rounded-lg text-neutral-400 hover:text-white hover:bg-neutral-800/50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-amber-500/50 touch-manipulation"
             aria-label="Cerrar"
           >
             <XIcon className="h-5 w-5" />

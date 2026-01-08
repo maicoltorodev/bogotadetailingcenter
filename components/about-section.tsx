@@ -401,30 +401,28 @@ export function AboutSection() {
                 calidad excepcional, soluciones efectivas y resultados que dejan tu carro{" "}
                 <span className="text-amber-400 font-bold text-2xl">#MejorQueNuevo</span>.
               </p>
-              <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 justify-center">
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center justify-center">
                 <a 
                   href="/#contacto" 
-                  className="inline-block group/button touch-manipulation"
+                  className="inline-flex group/button touch-manipulation min-h-[48px] min-w-[48px] items-center justify-center"
                   onClick={(e) => {
                     e.preventDefault()
                     handleHashClick("#contacto")
                   }}
-                  style={{ minHeight: '44px', minWidth: '44px' }}
                 >
-                  <Button size="lg" className="!h-auto bg-gradient-to-r from-amber-500 to-amber-600 text-neutral-950 hover:from-amber-400 hover:to-amber-500 font-bold px-10 text-lg shadow-lg hover:shadow-amber-500/50 hover:scale-105 transition-all duration-300 !min-h-[44px] !min-w-[44px] py-[12px] touch-manipulation inline-flex items-center justify-center">
+                  <Button size="lg" className="!h-auto bg-gradient-to-r from-amber-500 to-amber-600 text-neutral-950 hover:from-amber-400 hover:to-amber-500 font-bold px-10 text-lg shadow-lg hover:shadow-amber-500/50 hover:scale-105 transition-all duration-300 !min-h-[48px] py-[14px] touch-manipulation inline-flex items-center justify-center">
                     Agenda tu Cita
                   </Button>
                 </a>
                 <a 
                   href="/#servicios" 
-                  className="inline-block touch-manipulation"
+                  className="inline-flex touch-manipulation min-h-[48px] min-w-[48px] items-center justify-center"
                   onClick={(e) => {
                     e.preventDefault()
                     handleHashClick("#servicios")
                   }}
-                  style={{ minHeight: '44px', minWidth: '44px' }}
                 >
-                  <Button size="lg" variant="outline" className="!h-auto border-2 border-neutral-700 text-white hover:bg-neutral-800 hover:border-neutral-600 font-bold px-10 text-lg transition-all duration-300 !min-h-[44px] !min-w-[44px] py-[12px] touch-manipulation inline-flex items-center justify-center">
+                  <Button size="lg" variant="outline" className="!h-auto border-2 border-neutral-700 text-white hover:bg-neutral-800 hover:border-neutral-600 font-bold px-10 text-lg transition-all duration-300 !min-h-[48px] py-[14px] touch-manipulation inline-flex items-center justify-center">
                     Ver Nuestros Servicios
                   </Button>
                 </a>
