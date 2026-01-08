@@ -9,7 +9,7 @@ const Process = dynamic(() => import("@/components/process").then(mod => ({ defa
 const SedesSection = dynamic(() => import("@/components/sedes-section").then(mod => ({ default: mod.SedesSection })), { ssr: true })
 const Contact = dynamic(() => import("@/components/contact").then(mod => ({ default: mod.Contact })), { ssr: true })
 const Footer = dynamic(() => import("@/components/footer").then(mod => ({ default: mod.Footer })), { ssr: true })
-const WhatsAppButtonLoader = dynamic(() => import("@/components/whatsapp-button-loader").then(mod => ({ default: mod.WhatsAppButtonLoader })), { ssr: false }) // Solo cliente
+const WhatsAppButtonLoader = dynamic(() => import("@/components/whatsapp-button-loader").then(mod => ({ default: mod.WhatsAppButtonLoader })), { ssr: true }) // Ya gestiona client-side internamente
 
 const Gallery = dynamic(() => import("@/components/gallery").then(mod => ({ default: mod.Gallery })), {
   ssr: true,
