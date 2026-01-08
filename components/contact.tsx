@@ -93,7 +93,7 @@ export function Contact() {
                     }}
                   >
                     <WhatsAppIcon className="mr-2 h-5 w-5" />
-                    Contactar por WhatsApp - {sede.name}
+                    Contactar Por Whatsapp
                   </Button>
                 </a>
               </div>
