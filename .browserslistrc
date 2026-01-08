@@ -1,0 +1,12 @@
+# Navegadores modernos solamente - elimina polyfills innecesarios
+# Soporta navegadores con > 0.5% de uso y actualizados en los últimos 24 meses
+> 0.5%
+last 2 versions
+not dead
+not IE 11
+
+# Navegadores específicos modernos
+Chrome >= 92
+Firefox >= 90
+Safari >= 15.4
+Edge >= 92

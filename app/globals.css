@@ -1,0 +1,632 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Updated color palette for luxury detailing aesthetic with deep blacks, gold accents, and neutral grays */
+  --background: oklch(0.1 0 0);
+  --foreground: oklch(0.98 0 0);
+  --card: oklch(0.15 0 0);
+  --card-foreground: oklch(0.98 0 0);
+  --popover: oklch(0.1 0 0);
+  --popover-foreground: oklch(0.98 0 0);
+  --primary: oklch(0.75 0.15 85);
+  --primary-foreground: oklch(0.1 0 0);
+  --secondary: oklch(0.25 0 0);
+  --secondary-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.25 0 0);
+  --muted-foreground: oklch(0.6 0 0);
+  --accent: oklch(0.75 0.15 85);
+  --accent-foreground: oklch(0.1 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.25 0 0);
+  --input: oklch(0.25 0 0);
+  --ring: oklch(0.75 0.15 85);
+  --chart-1: oklch(0.75 0.15 85);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.5rem;
+  --sidebar: oklch(0.15 0 0);
+  --sidebar-foreground: oklch(0.98 0 0);
+  --sidebar-primary: oklch(0.75 0.15 85);
+  --sidebar-primary-foreground: oklch(0.1 0 0);
+  --sidebar-accent: oklch(0.25 0 0);
+  --sidebar-accent-foreground: oklch(0.98 0 0);
+  --sidebar-border: oklch(0.25 0 0);
+  --sidebar-ring: oklch(0.75 0.15 85);
+}
+
+.dark {
+  --background: oklch(0.1 0 0);
+  --foreground: oklch(0.98 0 0);
+  --card: oklch(0.15 0 0);
+  --card-foreground: oklch(0.98 0 0);
+  --popover: oklch(0.1 0 0);
+  --popover-foreground: oklch(0.98 0 0);
+  --primary: oklch(0.75 0.15 85);
+  --primary-foreground: oklch(0.1 0 0);
+  --secondary: oklch(0.25 0 0);
+  --secondary-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.25 0 0);
+  --muted-foreground: oklch(0.6 0 0);
+  --accent: oklch(0.75 0.15 85);
+  --accent-foreground: oklch(0.1 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.25 0 0);
+  --input: oklch(0.25 0 0);
+  --ring: oklch(0.75 0.15 85);
+  --chart-1: oklch(0.75 0.15 85);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.15 0 0);
+  --sidebar-foreground: oklch(0.98 0 0);
+  --sidebar-primary: oklch(0.75 0.15 85);
+  --sidebar-primary-foreground: oklch(0.1 0 0);
+  --sidebar-accent: oklch(0.25 0 0);
+  --sidebar-accent-foreground: oklch(0.98 0 0);
+  --sidebar-border: oklch(0.25 0 0);
+  --sidebar-ring: oklch(0.75 0.15 85);
+}
+
+@theme inline {
+  /* Added elegant serif font for headings to convey luxury */
+  --font-sans: "Geist", "Geist Fallback";
+  --font-mono: "Geist Mono", "Geist Mono Fallback";
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+    /* Prevenir movimiento del navbar cuando aparece/desaparece la barra de scroll */
+    scrollbar-gutter: stable;
+  }
+  body {
+    @apply bg-background text-foreground;
+    margin: 0;
+    padding: 0;
+    /* Safe areas para iOS */
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+    /* Forzar barra de scroll siempre visible para evitar movimiento del navbar */
+    /* Fallback para navegadores que no soportan scrollbar-gutter */
+    overflow-y: scroll;
+  }
+  
+  /* En navegadores que soportan scrollbar-gutter, usar esa en su lugar */
+  @supports (scrollbar-gutter: stable) {
+    body {
+      overflow-y: auto; /* Volver a auto cuando scrollbar-gutter funciona */
+    }
+  }
+  
+  /* Proteger contenido principal contra movimiento del scrollbar */
+  /* El scrollbar-gutter en html ya protege el viewport, pero agregamos protección extra */
+  main {
+    width: 100%;
+    position: relative;
+    /* Asegurar que elementos dentro respeten el espacio del scrollbar */
+    box-sizing: border-box;
+  }
+  
+  /* Para navegadores sin soporte de scrollbar-gutter, usar padding dinámico */
+  @supports not (scrollbar-gutter: stable) {
+    body {
+      /* El overflow-y: scroll ya fuerza la barra siempre visible */
+      /* Esto previene el movimiento sin necesidad de padding extra */
+    }
+  }
+  
+  /* Proteger elementos fixed/absolute que podrían moverse */
+  [class*="fixed"],
+  [class*="absolute"] {
+    /* Asegurar que elementos posicionados también respeten el scrollbar */
+    box-sizing: border-box;
+  }
+  /* Optimización: Reducir animaciones si el usuario prefiere menos movimiento */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* Optimizaciones móvil */
+@media (max-width: 767px) {
+  /* Prevenir scroll horizontal */
+  body {
+    overflow-x: hidden;
+    position: relative;
+  }
+  
+  /* Mejorar rendimiento de scroll */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Touch action para mejor rendimiento */
+  button, a, [role="button"] {
+    touch-action: manipulation;
+  }
+  
+  /* Prevenir zoom en inputs (iOS Safari) */
+  input, select, textarea {
+    font-size: 16px; /* Evita zoom automático en iOS */
+  }
+  
+  /* Estados :active mejorados para móvil - usar transform para GPU */
+  button:active,
+  a:active,
+  [role="button"]:active {
+    transform: scale(0.95) translateZ(0);
+    opacity: 0.9;
+  }
+  
+  /* Mejorar line-height en móvil para legibilidad */
+  p, span {
+    line-height: 1.6;
+  }
+  
+  h1, h2, h3 {
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+  
+  /* Optimizar transformaciones - usar GPU */
+  [class*="hover:scale"],
+  [class*="group-hover:scale"] {
+    will-change: transform;
+    transform: translateZ(0); /* Forzar aceleración GPU */
+  }
+  
+  /* Reducir transiciones complejas en móvil */
+  img, [class*="transition"] {
+    transition-duration: 0.2s; /* Más rápido en móvil */
+  }
+}
+
+/* Animaciones para el Hero */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.hero-title {
+  animation: fadeInUp 1s ease-out;
+}
+
+.hero-title-highlight {
+  animation: fadeInLeft 1s ease-out 0.3s both;
+}
+
+.hero-title-last {
+  animation: fadeInUp 1s ease-out 0.5s both;
+}
+
+/* Animación de brillo para "Detailing" - optimizada */
+@keyframes glow {
+  0%, 100% {
+    text-shadow: 0 0 8px rgba(245, 158, 11, 0.4),
+                 0 0 16px rgba(245, 158, 11, 0.3),
+                 0 0 24px rgba(245, 158, 11, 0.2);
+    /* Usar opacity en lugar de filter brightness cuando sea posible */
+  }
+  50% {
+    text-shadow: 0 0 16px rgba(245, 158, 11, 0.7),
+                 0 0 32px rgba(245, 158, 11, 0.5),
+                 0 0 48px rgba(245, 158, 11, 0.3),
+                 0 0 64px rgba(245, 158, 11, 0.15);
+    /* Sin filter para mejor rendimiento - text-shadow es suficiente */
+  }
+}
+
+/* Optimización móvil: Usar transform en lugar de filter para mejor rendimiento */
+@media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
+  .hero-title-highlight,
+  .hero-lema {
+    transform: translateZ(0); /* Forzar aceleración por hardware */
+    backface-visibility: hidden;
+    will-change: transform; /* Optimización para GPU */
+    /* Evitar filter en móvil - es muy costoso */
+  }
+}
+
+/* Animación de brillo reducida para móvil - sin filter para mejor rendimiento */
+@keyframes glowMobile {
+  0%, 100% {
+    text-shadow: 0 0 4px rgba(245, 158, 11, 0.3),
+                 0 0 8px rgba(245, 158, 11, 0.2),
+                 0 0 12px rgba(245, 158, 11, 0.15);
+    /* Sin filter: brightness() es muy costoso en móvil */
+  }
+  50% {
+    text-shadow: 0 0 8px rgba(245, 158, 11, 0.5),
+                 0 0 16px rgba(245, 158, 11, 0.35),
+                 0 0 24px rgba(245, 158, 11, 0.2);
+    /* Sin filter para mejor rendimiento */
+  }
+}
+
+/* Desactivar animaciones pesadas en dispositivos de bajo rendimiento */
+body.low-performance .hero-title-highlight,
+body.low-performance .hero-lema {
+  animation: none !important;
+  text-shadow: 0 0 8px rgba(245, 158, 11, 0.4) !important;
+}
+
+.hero-title-highlight {
+  animation: fadeInLeft 1s ease-out 0.3s both,
+             glowMobile 2s ease-in-out 1.3s infinite;
+  position: relative;
+}
+
+@media (min-width: 640px) {
+  .hero-title-highlight {
+    animation: fadeInLeft 1s ease-out 0.3s both,
+               glow 2s ease-in-out 1.3s infinite;
+  }
+}
+
+.hero-lema {
+  animation: glowMobile 2s ease-in-out 0.5s infinite;
+  position: relative;
+}
+
+@media (min-width: 640px) {
+  .hero-lema {
+    animation: glow 2s ease-in-out 0.5s infinite;
+  }
+}
+
+/* Animación de brillo para botones */
+@keyframes buttonGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.6),
+                 0 0 30px rgba(245, 158, 11, 0.5),
+                 0 0 45px rgba(245, 158, 11, 0.4),
+                 0 0 60px rgba(245, 158, 11, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(245, 158, 11, 0.9),
+                 0 0 50px rgba(245, 158, 11, 0.7),
+                 0 0 75px rgba(245, 158, 11, 0.5),
+                 0 0 100px rgba(245, 158, 11, 0.3);
+  }
+}
+
+/* Animación de brillo reducida para botones en móvil - optimizada */
+@keyframes buttonGlowMobile {
+  0%, 100% {
+    box-shadow: 0 0 6px rgba(245, 158, 11, 0.4),
+                 0 0 12px rgba(245, 158, 11, 0.3);
+    /* Reducido para mejor rendimiento en móvil */
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.6),
+                 0 0 20px rgba(245, 158, 11, 0.4);
+    /* Menos sombras = mejor rendimiento */
+  }
+}
+
+/* Desactivar animaciones de botones en dispositivos de bajo rendimiento */
+body.low-performance .hero-contact-button,
+body.low-performance .form-submit-button {
+  animation: none !important;
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.4) !important;
+}
+
+.hero-contact-button {
+  animation: buttonGlowMobile 2s ease-in-out 0.5s infinite !important;
+  position: relative;
+}
+
+@media (min-width: 640px) {
+  .hero-contact-button {
+    animation: buttonGlow 2s ease-in-out 0.5s infinite !important;
+  }
+}
+
+/* Animación más sutil para el botón del formulario */
+@keyframes buttonGlowSubtle {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.5) !important,
+                0 0 20px rgba(245, 158, 11, 0.4) !important,
+                0 0 30px rgba(245, 158, 11, 0.2) !important;
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.7) !important,
+                0 0 30px rgba(245, 158, 11, 0.5) !important,
+                0 0 45px rgba(245, 158, 11, 0.3) !important,
+                0 0 60px rgba(245, 158, 11, 0.15) !important;
+  }
+}
+
+/* Animación aún más sutil para móvil */
+@keyframes buttonGlowSubtleMobile {
+  0%, 100% {
+    box-shadow: 0 0 6px rgba(245, 158, 11, 0.4) !important,
+                0 0 12px rgba(245, 158, 11, 0.3) !important;
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.6) !important,
+                0 0 20px rgba(245, 158, 11, 0.4) !important,
+                0 0 30px rgba(245, 158, 11, 0.2) !important;
+  }
+}
+
+.form-submit-button {
+  animation: buttonGlowSubtleMobile 3s ease-in-out 0.5s infinite !important;
+  position: relative !important;
+  box-shadow: 0 0 6px rgba(245, 158, 11, 0.4), 0 0 12px rgba(245, 158, 11, 0.3) !important;
+}
+
+@media (min-width: 640px) {
+  .form-submit-button {
+    animation: buttonGlowSubtle 3s ease-in-out 0.5s infinite !important;
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.5), 0 0 20px rgba(245, 158, 11, 0.4), 0 0 30px rgba(245, 158, 11, 0.2) !important;
+  }
+}
+
+/* Animación de placa reluciente para el badge de años de experiencia */
+@keyframes silverSweep {
+  0% {
+    left: -100%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+.experience-badge {
+  position: relative;
+  overflow: hidden;
+}
+
+.experience-badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(192, 192, 192, 0.3) 20%,
+    rgba(255, 255, 255, 0.7) 50%,
+    rgba(192, 192, 192, 0.3) 80%,
+    transparent 100%
+  );
+  animation: silverSweep 3s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+  transform: skewX(-20deg);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+}
+
+.experience-badge > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Animación de brillo tipo placa (Shine/Sweep Animation) - optimizada */
+.border-draw-sequential {
+  position: relative;
+  overflow: hidden;
+  /* Optimización: contener repaints */
+  contain: layout style paint;
+}
+
+.border-draw-sequential::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 30%,
+    rgba(245, 158, 11, 0.4) 50%,
+    rgba(255, 255, 255, 0.1) 70%,
+    transparent 100%
+  );
+  transform: skewX(-20deg) translateX(-100%) translateZ(0); /* GPU acceleration */
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  z-index: 10;
+  will-change: transform; /* Solo transform, opacity es barato */
+  animation: none; /* Sin animación por defecto */
+  backface-visibility: hidden; /* Optimización móvil */
+}
+
+/* En desktop: activar con hover */
+@media (hover: hover) and (pointer: fine) {
+  .border-draw-sequential:hover::before {
+    opacity: 1;
+    animation: shineSweep 1.5s ease-in-out; /* Se reinicia cada hover */
+  }
+}
+
+/* En móvil: activar cuando está en el centro del viewport */
+.border-draw-sequential.scroll-center-active::before {
+  opacity: 1;
+  animation: shineSweep 1.5s ease-in-out;
+}
+
+@keyframes shineSweep {
+  0% {
+    transform: skewX(-20deg) translateX(-100%) translateZ(0);
+  }
+  50% {
+    transform: skewX(-20deg) translateX(100%) translateZ(0);
+  }
+  100% {
+    transform: skewX(-20deg) translateX(100%) translateZ(0);
+  }
+}
+
+/* Asegurar que el contenido esté por encima del brillo */
+.border-draw-sequential > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Animación específica para cards de servicios - efecto de pulso/glow en el borde */
+.border-draw-services {
+  position: relative;
+  overflow: visible; /* Visible para que el glow del borde se vea */
+  transition: border-color 0.3s ease;
+  /* Optimización: contener repaints */
+  contain: layout style;
+}
+
+.border-draw-services::before {
+  content: '';
+  position: absolute;
+  inset: -3px; /* Extender fuera del borde para el glow */
+  border-radius: inherit;
+  background: transparent;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+  box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+  transition: opacity 0.2s ease;
+  animation: none; /* Sin animación por defecto */
+  will-change: box-shadow; /* Optimización para la animación */
+  transform: translateZ(0); /* GPU acceleration */
+}
+
+/* En desktop: activar con hover */
+@media (hover: hover) and (pointer: fine) {
+  .border-draw-services:hover {
+    border-color: rgba(245, 158, 11, 0.5);
+  }
+  .border-draw-services:hover::before {
+    opacity: 1;
+    animation: borderPulse 1.2s ease-out;
+  }
+}
+
+/* En móvil: activar cuando está en el centro del viewport */
+.border-draw-services.scroll-center-active {
+  border-color: rgba(245, 158, 11, 0.5);
+}
+.border-draw-services.scroll-center-active::before {
+  opacity: 1;
+  animation: borderPulse 1.2s ease-out;
+}
+
+@keyframes borderPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.8),
+                0 0 0 0 rgba(245, 158, 11, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(245, 158, 11, 0.5),
+                0 0 0 12px rgba(245, 158, 11, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgba(245, 158, 11, 0),
+                0 0 0 16px rgba(245, 158, 11, 0);
+  }
+}
+
+/* Reducir animaciones en dispositivos de bajo rendimiento */
+body.low-performance .border-draw-sequential::before,
+body.low-performance .border-draw-services::before {
+  animation: none !important;
+}
+
+body.reduced-motion .border-draw-sequential::before,
+body.reduced-motion .border-draw-services::before {
+  animation: none !important;
+}
+
+/* Asegurar que el contenido esté por encima del glow */
+.border-draw-services > * {
+  position: relative;
+  z-index: 2;
+}
