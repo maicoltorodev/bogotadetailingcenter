@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Award, CheckCircle2, Shield, Sparkles, Users, Calendar, Target, Badge } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { CardInView } from "@/components/ui/card-in-view"
+import { CardInViewGroup } from "@/components/ui/card-in-view-context"
 import { usePathname, useRouter } from "next/navigation"
 import { scrollToHash } from "@/lib/scroll-utils"
 import Image from "next/image"
@@ -99,8 +100,8 @@ export function AboutSection() {
                 <h3 className="text-2xl sm:text-3xl font-bold text-white font-serif">Nuestra Misión</h3>
               </div>
               <p className="text-base sm:text-lg md:text-xl leading-relaxed text-neutral-200">
-                Somos un centro especializado en detailing automotriz, recubrimientos cerámicos y corrección de pintura. 
-                Nuestra misión es dejar tu vehículo <span className="text-amber-400 font-bold text-2xl">#MejorQueNuevo</span> mediante 
+                Somos un centro especializado en detailing automotriz, recubrimientos cerámicos y corrección de pintura.
+                Nuestra misión es dejar tu vehículo <span className="text-amber-400 font-bold text-2xl">#MejorQueNuevo</span> mediante
                 procedimientos de alta calidad que restauran y protegen su estética.
               </p>
             </Card>
@@ -155,11 +156,11 @@ export function AboutSection() {
             <div className="text-center mb-8">
               <h3 className="text-3xl font-bold text-white mb-4 font-serif">Detallado Automotriz de Alta Calidad</h3>
               <p className="text-lg text-neutral-300 max-w-3xl mx-auto">
-                Nuestro equipo está liderado por <span className="text-amber-500 font-semibold">Juan Carlos Pinzón</span>. 
+                Nuestro equipo está liderado por <span className="text-amber-500 font-semibold">Juan Carlos Pinzón</span>.
                 Todos nuestros técnicos cuentan con certificación <span className="text-amber-500 font-semibold">IDA (International Detailing Association)</span>.
               </p>
             </div>
-            
+
             <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               <div>
                 <h4 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
@@ -185,7 +186,7 @@ export function AboutSection() {
                   </li>
                 </ul>
               </div>
-              
+
               <div>
                 <h4 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
                   <Sparkles className="h-6 w-6 text-amber-500" />
@@ -219,91 +220,93 @@ export function AboutSection() {
           <div className="text-center mb-12">
             <h3 className="text-4xl md:text-5xl font-bold text-white mb-6 font-serif">Compromiso con la Calidad</h3>
             <p className="text-xl text-neutral-300 mb-10 max-w-3xl mx-auto leading-relaxed">
-              En Bogotá Detailing Center nos esforzamos por superar tus expectativas, ofreciendo un servicio profesional 
+              En Bogotá Detailing Center nos esforzamos por superar tus expectativas, ofreciendo un servicio profesional
               que protege tu inversión y resalta la belleza de tu vehículo.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
-            <CardInView>
-              <Card className="group relative overflow-hidden border border-neutral-800/50 bg-gradient-to-br from-neutral-950 via-neutral-900/50 to-neutral-950 backdrop-blur-sm p-8 md:p-10 text-center hover:border-amber-500/30 hover:shadow-xl hover:shadow-amber-500/5 transition-all duration-500 rounded-2xl hover:-translate-y-1">
-                {/* Decorative gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="absolute top-0 right-0 w-40 h-40 bg-amber-500/3 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                
-                <div className="relative z-10">
-                  {/* Icon Container */}
-                <div className="flex items-center justify-center mb-6">
-                    <div className="relative">
-                      <div className="absolute inset-0 bg-amber-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500" />
-                      <div className="relative inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br from-amber-500/20 to-amber-600/10 border border-amber-500/30 shadow-lg shadow-amber-500/10 group-hover:scale-110 group-hover:shadow-amber-500/20 transition-all duration-300">
-                        <Users className="h-8 w-8 md:h-10 md:w-10 text-amber-400" />
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* Content */}
-                  <div className="space-y-3">
-                    <h4 className="font-bold text-white text-xl md:text-2xl font-serif tracking-tight">Atención Personalizada</h4>
-                    <div className="h-px w-12 bg-gradient-to-r from-transparent via-amber-500/50 to-transparent mx-auto" />
-                    <p className="text-neutral-400 text-sm md:text-base leading-relaxed font-medium">En cada una de nuestras sedes</p>
-                  </div>
-              </div>
-            </Card>
-            </CardInView>
+            <CardInViewGroup className="contents">
+              <CardInView>
+                <Card className="group relative overflow-hidden border border-neutral-800/50 bg-gradient-to-br from-neutral-950 via-neutral-900/50 to-neutral-950 backdrop-blur-sm p-8 md:p-10 text-center hover:border-amber-500/30 hover:shadow-xl hover:shadow-amber-500/5 transition-all duration-500 rounded-2xl hover:-translate-y-1">
+                  {/* Decorative gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute top-0 right-0 w-40 h-40 bg-amber-500/3 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
-            <CardInView>
-              <Card className="group relative overflow-hidden border border-neutral-800/50 bg-gradient-to-br from-neutral-950 via-neutral-900/50 to-neutral-950 backdrop-blur-sm p-8 md:p-10 text-center hover:border-amber-500/30 hover:shadow-xl hover:shadow-amber-500/5 transition-all duration-500 rounded-2xl hover:-translate-y-1">
-                {/* Decorative gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="absolute top-0 right-0 w-40 h-40 bg-amber-500/3 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                
-                <div className="relative z-10">
-                  {/* Icon Container */}
-                <div className="flex items-center justify-center mb-6">
-                    <div className="relative">
-                      <div className="absolute inset-0 bg-amber-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500" />
-                      <div className="relative inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br from-amber-500/20 to-amber-600/10 border border-amber-500/30 shadow-lg shadow-amber-500/10 group-hover:scale-110 group-hover:shadow-amber-500/20 transition-all duration-300">
-                        <Sparkles className="h-8 w-8 md:h-10 md:w-10 text-amber-400" />
+                  <div className="relative z-10">
+                    {/* Icon Container */}
+                    <div className="flex items-center justify-center mb-6">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-amber-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500" />
+                        <div className="relative inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br from-amber-500/20 to-amber-600/10 border border-amber-500/30 shadow-lg shadow-amber-500/10 group-hover:scale-110 group-hover:shadow-amber-500/20 transition-all duration-300">
+                          <Users className="h-8 w-8 md:h-10 md:w-10 text-amber-400" />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  
-                  {/* Content */}
-                  <div className="space-y-3">
-                    <h4 className="font-bold text-white text-xl md:text-2xl font-serif tracking-tight">Resultados Excepcionales</h4>
-                    <div className="h-px w-12 bg-gradient-to-r from-transparent via-amber-500/50 to-transparent mx-auto" />
-                    <p className="text-neutral-400 text-sm md:text-base leading-relaxed font-medium">Tu auto brillará como recién salido de concesionario</p>
-                  </div>
-              </div>
-            </Card>
-            </CardInView>
 
-            <CardInView>
-              <Card className="group relative overflow-hidden border border-neutral-800/50 bg-gradient-to-br from-neutral-950 via-neutral-900/50 to-neutral-950 backdrop-blur-sm p-8 md:p-10 text-center hover:border-amber-500/30 hover:shadow-xl hover:shadow-amber-500/5 transition-all duration-500 rounded-2xl hover:-translate-y-1">
-                {/* Decorative gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="absolute top-0 right-0 w-40 h-40 bg-amber-500/3 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                
-                <div className="relative z-10">
-                  {/* Icon Container */}
-                <div className="flex items-center justify-center mb-6">
-                    <div className="relative">
-                      <div className="absolute inset-0 bg-amber-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500" />
-                      <div className="relative inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br from-amber-500/20 to-amber-600/10 border border-amber-500/30 shadow-lg shadow-amber-500/10 group-hover:scale-110 group-hover:shadow-amber-500/20 transition-all duration-300">
-                        <Shield className="h-8 w-8 md:h-10 md:w-10 text-amber-400" />
-                      </div>
+                    {/* Content */}
+                    <div className="space-y-3">
+                      <h4 className="font-bold text-white text-xl md:text-2xl font-serif tracking-tight">Atención Personalizada</h4>
+                      <div className="h-px w-12 bg-gradient-to-r from-transparent via-amber-500/50 to-transparent mx-auto" />
+                      <p className="text-neutral-400 text-sm md:text-base leading-relaxed font-medium">En cada una de nuestras sedes</p>
                     </div>
                   </div>
-                  
-                  {/* Content */}
-                  <div className="space-y-3">
-                    <h4 className="font-bold text-white text-xl md:text-2xl font-serif tracking-tight">Calidad Garantizada</h4>
-                    <div className="h-px w-12 bg-gradient-to-r from-transparent via-amber-500/50 to-transparent mx-auto" />
-                    <p className="text-neutral-400 text-sm md:text-base leading-relaxed font-medium">Soluciones efectivas y duraderas</p>
+                </Card>
+              </CardInView>
+
+              <CardInView>
+                <Card className="group relative overflow-hidden border border-neutral-800/50 bg-gradient-to-br from-neutral-950 via-neutral-900/50 to-neutral-950 backdrop-blur-sm p-8 md:p-10 text-center hover:border-amber-500/30 hover:shadow-xl hover:shadow-amber-500/5 transition-all duration-500 rounded-2xl hover:-translate-y-1">
+                  {/* Decorative gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute top-0 right-0 w-40 h-40 bg-amber-500/3 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+                  <div className="relative z-10">
+                    {/* Icon Container */}
+                    <div className="flex items-center justify-center mb-6">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-amber-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500" />
+                        <div className="relative inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br from-amber-500/20 to-amber-600/10 border border-amber-500/30 shadow-lg shadow-amber-500/10 group-hover:scale-110 group-hover:shadow-amber-500/20 transition-all duration-300">
+                          <Sparkles className="h-8 w-8 md:h-10 md:w-10 text-amber-400" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="space-y-3">
+                      <h4 className="font-bold text-white text-xl md:text-2xl font-serif tracking-tight">Resultados Excepcionales</h4>
+                      <div className="h-px w-12 bg-gradient-to-r from-transparent via-amber-500/50 to-transparent mx-auto" />
+                      <p className="text-neutral-400 text-sm md:text-base leading-relaxed font-medium">Tu auto brillará como recién salido de concesionario</p>
+                    </div>
                   </div>
-              </div>
-            </Card>
-            </CardInView>
+                </Card>
+              </CardInView>
+
+              <CardInView>
+                <Card className="group relative overflow-hidden border border-neutral-800/50 bg-gradient-to-br from-neutral-950 via-neutral-900/50 to-neutral-950 backdrop-blur-sm p-8 md:p-10 text-center hover:border-amber-500/30 hover:shadow-xl hover:shadow-amber-500/5 transition-all duration-500 rounded-2xl hover:-translate-y-1">
+                  {/* Decorative gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute top-0 right-0 w-40 h-40 bg-amber-500/3 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+                  <div className="relative z-10">
+                    {/* Icon Container */}
+                    <div className="flex items-center justify-center mb-6">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-amber-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500" />
+                        <div className="relative inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br from-amber-500/20 to-amber-600/10 border border-amber-500/30 shadow-lg shadow-amber-500/10 group-hover:scale-110 group-hover:shadow-amber-500/20 transition-all duration-300">
+                          <Shield className="h-8 w-8 md:h-10 md:w-10 text-amber-400" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="space-y-3">
+                      <h4 className="font-bold text-white text-xl md:text-2xl font-serif tracking-tight">Calidad Garantizada</h4>
+                      <div className="h-px w-12 bg-gradient-to-r from-transparent via-amber-500/50 to-transparent mx-auto" />
+                      <p className="text-neutral-400 text-sm md:text-base leading-relaxed font-medium">Soluciones efectivas y duraderas</p>
+                    </div>
+                  </div>
+                </Card>
+              </CardInView>
+            </CardInViewGroup>
           </div>
         </div>
 
@@ -393,17 +396,17 @@ export function AboutSection() {
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl" />
             <div className="relative z-10">
               <p className="text-2xl md:text-3xl text-white mb-6 max-w-3xl mx-auto leading-relaxed font-medium">
-                Si buscas un centro especializado en detailing automotriz, cerámicos o taller de pintura en Bogotá y Chía, 
+                Si buscas un centro especializado en detailing automotriz, cerámicos o taller de pintura en Bogotá y Chía,
                 somos tu mejor opción.
               </p>
               <p className="text-xl text-neutral-200 mb-10 max-w-3xl mx-auto">
-                Descubre por qué los amantes de autos y motos eligen a Bogotá Detailing Center: 
+                Descubre por qué los amantes de autos y motos eligen a Bogotá Detailing Center:
                 calidad excepcional, soluciones efectivas y resultados que dejan tu carro{" "}
                 <span className="text-amber-400 font-bold text-2xl">#MejorQueNuevo</span>.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center justify-center">
-                <a 
-                  href="/#contacto" 
+                <a
+                  href="/#contacto"
                   className="inline-flex group/button touch-manipulation min-h-[48px] min-w-[48px] items-center justify-center"
                   onClick={(e) => {
                     e.preventDefault()
@@ -414,8 +417,8 @@ export function AboutSection() {
                     Agenda tu Cita
                   </Button>
                 </a>
-                <a 
-                  href="/#servicios" 
+                <a
+                  href="/#servicios"
                   className="inline-flex touch-manipulation min-h-[48px] min-w-[48px] items-center justify-center"
                   onClick={(e) => {
                     e.preventDefault()
