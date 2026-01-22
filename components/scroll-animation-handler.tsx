@@ -20,8 +20,10 @@ export function ScrollAnimationHandler() {
     }
 
     // Detectar ambos tipos de elementos
-    const elements = document.querySelectorAll('.border-draw-sequential, .border-draw-services')
-    if (elements.length === 0) return
+    const elementsArray = Array.from(
+      document.querySelectorAll<HTMLElement>('.border-draw-sequential, .border-draw-services')
+    )
+    if (elementsArray.length === 0) return
 
     let rafId: number | null = null
     let isScrolling = false
@@ -31,18 +33,18 @@ export function ScrollAnimationHandler() {
     const checkCenter = () => {
       const viewportHeight = window.innerHeight
       const centerLine = viewportHeight / 2
-      let closestElement: Element | null = null
+      let closestElement: HTMLElement | null = null
       let minDistance = Infinity
 
       // Buscar el elemento más cercano al centro del viewport
-      elements.forEach((element) => {
+      for (const element of elementsArray) {
         const rect = element.getBoundingClientRect()
         
         // Solo considerar elementos visibles en el viewport
         if (rect.bottom < 0 || rect.top > viewportHeight) {
           // Si el elemento está fuera del viewport, asegurarse de que esté desactivado
           element.classList.remove('scroll-center-active')
-          return
+          continue
         }
 
         // Calcular el centro del elemento
@@ -55,12 +57,12 @@ export function ScrollAnimationHandler() {
           minDistance = distance
           closestElement = element
         }
-      })
+      }
 
       // Desactivar todos los elementos primero
-      elements.forEach((element) => {
+      for (const element of elementsArray) {
         element.classList.remove('scroll-center-active')
-      })
+      }
 
       // Activar solo el elemento más cercano al centro
       if (closestElement) {
@@ -88,7 +90,7 @@ export function ScrollAnimationHandler() {
     )
 
     // Observar todos los elementos
-    elements.forEach((element) => observer.observe(element))
+    elementsArray.forEach((element) => observer.observe(element))
 
     // Handler de scroll optimizado
     const onScroll = () => {
@@ -124,7 +126,7 @@ export function ScrollAnimationHandler() {
       // Usar mobileMediaQuery.matches en lugar de leer window.innerWidth
       if (!mobileMediaQuery.matches) {
         // Si ya no es móvil, desactivar todo y desconectar
-        elements.forEach((element) => {
+        elementsArray.forEach((element) => {
           element.classList.remove('scroll-center-active')
         })
         observer.disconnect()
@@ -156,7 +158,7 @@ export function ScrollAnimationHandler() {
       document.body.classList.remove('scrolling')
       
       // Limpiar clases activas
-      elements.forEach((element) => {
+      elementsArray.forEach((element) => {
         element.classList.remove('scroll-center-active')
       })
     }
