@@ -5,6 +5,7 @@ import { useEffect } from "react"
 /**
  * ScrollAnimationHandler - Detecta elementos con border-draw-sequential y border-draw-services
  * y activa la animación cuando están cerca del centro del viewport (solo en móvil)
+ * Solo activa UN elemento a la vez: el más cercano al centro del viewport
  * Usa IntersectionObserver para mejor rendimiento
  */
 export function ScrollAnimationHandler() {
@@ -22,57 +23,119 @@ export function ScrollAnimationHandler() {
     const elements = document.querySelectorAll('.border-draw-sequential, .border-draw-services')
     if (elements.length === 0) return
 
-    // Rastrear elementos que ya han sido activados (para evitar re-activación mientras están visibles)
-    const activatedElements = new WeakSet<Element>()
+    let rafId: number | null = null
+    let isScrolling = false
+    let scrollTimeout: NodeJS.Timeout
 
-    // Configurar IntersectionObserver para detectar elementos cerca del centro
-    // rootMargin: "0px -50% 0px -50%" hace que el viewport se enfoque en el centro
-    // Esto detecta cuando el elemento cruza el centro vertical del viewport
+    // Función para encontrar y activar solo el elemento más cercano al centro
+    const checkCenter = () => {
+      const viewportHeight = window.innerHeight
+      const centerLine = viewportHeight / 2
+      let closestElement: Element | null = null
+      let minDistance = Infinity
+
+      // Buscar el elemento más cercano al centro del viewport
+      elements.forEach((element) => {
+        const rect = element.getBoundingClientRect()
+        
+        // Solo considerar elementos visibles en el viewport
+        if (rect.bottom < 0 || rect.top > viewportHeight) {
+          // Si el elemento está fuera del viewport, asegurarse de que esté desactivado
+          element.classList.remove('scroll-center-active')
+          return
+        }
+
+        // Calcular el centro del elemento
+        const elementCenter = rect.top + rect.height / 2
+        // Calcular la distancia desde el centro del elemento al centro del viewport
+        const distance = Math.abs(centerLine - elementCenter)
+
+        // Si este elemento está más cerca del centro, es el candidato
+        if (distance < minDistance) {
+          minDistance = distance
+          closestElement = element
+        }
+      })
+
+      // Desactivar todos los elementos primero
+      elements.forEach((element) => {
+        element.classList.remove('scroll-center-active')
+      })
+
+      // Activar solo el elemento más cercano al centro
+      if (closestElement) {
+        closestElement.classList.add('scroll-center-active')
+      }
+
+      rafId = null
+    }
+
+    // Configurar IntersectionObserver para detectar cuando elementos entran/salen del viewport
+    // Esto optimiza el rendimiento al solo verificar elementos visibles
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          const element = entry.target
-          
-          if (entry.isIntersecting) {
-            // Elemento está en el centro - activar animación solo si no ha sido activado antes
-            if (!activatedElements.has(element)) {
-              element.classList.add('scroll-center-active')
-              activatedElements.add(element)
-              
-              // Remover la clase después de que la animación termine (1500ms)
-              setTimeout(() => {
-                element.classList.remove('scroll-center-active')
-              }, 1500)
-            }
-          } else {
-            // Elemento salió del área de intersección - permitir re-activación
-            activatedElements.delete(element)
-            element.classList.remove('scroll-center-active')
-          }
-        })
+        // Cuando un elemento entra o sale del viewport, verificar el centro
+        // Usar RAF para agrupar múltiples cambios
+        if (!rafId) {
+          rafId = requestAnimationFrame(checkCenter)
+        }
       },
       {
-        // rootMargin crea un área de intersección enfocada en el centro vertical
-        // "0px -50% 0px -50%" significa: sin margen arriba/abajo, -50% izquierda/derecha
-        // Esto efectivamente reduce el área de detección al centro vertical
-        rootMargin: '0px -50% 0px -50%',
-        // threshold: 0 significa que se activa cuando cualquier parte entra al área
-        threshold: 0,
+        // Observar cuando elementos entran/salen del viewport
+        rootMargin: '0px',
+        threshold: [0, 0.1, 0.5, 1.0],
       }
     )
 
     // Observar todos los elementos
     elements.forEach((element) => observer.observe(element))
 
+    // Handler de scroll optimizado
+    const onScroll = () => {
+      if (!isScrolling) {
+        isScrolling = true
+        document.body.classList.add('scrolling')
+      }
+      
+      clearTimeout(scrollTimeout)
+      scrollTimeout = setTimeout(() => {
+        isScrolling = false
+        document.body.classList.remove('scrolling')
+        // Verificación final después de que el scroll termine
+        if (!rafId) {
+          rafId = requestAnimationFrame(checkCenter)
+        }
+      }, 150)
+
+      // Verificar durante el scroll usando RAF
+      if (!rafId) {
+        rafId = requestAnimationFrame(checkCenter)
+      }
+    }
+
+    // Verificación inicial
+    checkCenter()
+
+    // Escuchar eventos de scroll
+    window.addEventListener('scroll', onScroll, { passive: true })
+
     // Manejar resize usando matchMedia para evitar forced reflow
     const handleResize = () => {
       // Usar mobileMediaQuery.matches en lugar de leer window.innerWidth
       if (!mobileMediaQuery.matches) {
+        // Si ya no es móvil, desactivar todo y desconectar
         elements.forEach((element) => {
           element.classList.remove('scroll-center-active')
-          activatedElements.delete(element)
         })
         observer.disconnect()
+        window.removeEventListener('scroll', onScroll)
+        if (rafId) cancelAnimationFrame(rafId)
+        clearTimeout(scrollTimeout)
+      } else {
+        // Si sigue siendo móvil, recalcular después del resize
+        if (!rafId) {
+          rafId = requestAnimationFrame(checkCenter)
+        }
       }
     }
     
@@ -84,6 +147,13 @@ export function ScrollAnimationHandler() {
       observer.disconnect()
       mobileMediaQuery.removeEventListener('change', handleResize)
       window.removeEventListener('resize', handleResize)
+      window.removeEventListener('scroll', onScroll)
+      
+      if (rafId) {
+        cancelAnimationFrame(rafId)
+      }
+      clearTimeout(scrollTimeout)
+      document.body.classList.remove('scrolling')
       
       // Limpiar clases activas
       elements.forEach((element) => {

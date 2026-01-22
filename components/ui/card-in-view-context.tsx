@@ -70,24 +70,46 @@ export function CardInViewGroup({ children, className }: CardInViewGroupProps) {
       let closestCardId: string | null = null
       let minDistance = Infinity
 
+      // Zona de detección: solo considerar cards dentro de una zona razonable del centro
+      // Esto evita activar cards que están muy lejos del centro
+      const detectionZoneHeight = viewportHeight * 0.6 // 60% del viewport
+      const zoneTop = centerLine - detectionZoneHeight / 2
+      const zoneBottom = centerLine + detectionZoneHeight / 2
+
       // Find the card closest to the center
       cardsRef.current.forEach((card) => {
         const rect = card.ref.getBoundingClientRect()
+        
         // Check if card is visible in viewport at all
-        if (rect.bottom < 0 || rect.top > viewportHeight) return
+        if (rect.bottom < 0 || rect.top > viewportHeight) {
+          // Si la card está fuera del viewport, asegurarse de que esté desactivada
+          card.setActive(false)
+          return
+        }
 
+        // Verificar si la card intersecta con la zona de detección
+        const cardIntersectsZone = rect.bottom >= zoneTop && rect.top <= zoneBottom
+        
+        if (!cardIntersectsZone) {
+          // Si la card no está en la zona de detección, desactivarla
+          card.setActive(false)
+          return
+        }
+
+        // Calcular el centro de la card
         const cardCenter = rect.top + rect.height / 2
+        // Calcular la distancia desde el centro de la card al centro del viewport
         const distance = Math.abs(centerLine - cardCenter)
 
-        // Only consider cards that are roughly in the middle area (optional optimization)
-        // or just pick the absolute winner. Let's pick the absolute winner among visible ones.
+        // Solo considerar cards que están realmente cerca del centro
+        // Si la distancia es menor que la mínima encontrada, esta es la más cercana
         if (distance < minDistance) {
           minDistance = distance
           closestCardId = card.id
         }
       })
 
-      // Update states
+      // Actualizar estados: solo la card más cercana al centro estará activa
       cardsRef.current.forEach((card) => {
         card.setActive(card.id === closestCardId)
       })
@@ -119,13 +141,36 @@ export function CardInViewGroup({ children, className }: CardInViewGroupProps) {
     // Initial check
     checkCenter()
 
+    // Handler para resize - recalcular cuando cambia el tamaño del viewport
+    const handleResize = () => {
+      if (!isMobile) {
+        // Si ya no es móvil, desactivar todas las cards
+        cardsRef.current.forEach((card) => {
+          card.setActive(false)
+        })
+        return
+      }
+      
+      // Recalcular después del resize
+      if (!rafId) {
+        rafId = requestAnimationFrame(checkCenter)
+      }
+    }
+
     window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', handleResize, { passive: true })
     
     return () => {
       window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', handleResize)
       if (rafId) cancelAnimationFrame(rafId)
       clearTimeout(scrollTimeout)
       document.body.classList.remove('scrolling')
+      
+      // Desactivar todas las cards al limpiar
+      cardsRef.current.forEach((card) => {
+        card.setActive(false)
+      })
     }
   }, [isMobile])
 
